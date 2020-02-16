@@ -6,6 +6,9 @@
   "files": [
     "dist"
   ],
+  "bugs": {
+    "url": "https://github.com/jlkiri/gatsby-remark-shiki/issues"
+  },
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
@@ -25,9 +28,16 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "shiki",
+    "remark"
+  ],
   "name": "gatsby-remark-shiki",
-  "author": "jlkiri",
+  "author": "Kirill Vasiltsov (@jlkiri)",
   "module": "dist/gatsby-remark-shiki.esm.js",
+  "homepage": "https://github.com/jlkiri/gatsby-remark-shiki",
   "devDependencies": {
     "@types/jest": "^25.1.2",
     "husky": "^4.2.3",
