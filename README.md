@@ -12,7 +12,7 @@ You need it to highlight code blocks (```) in your markdown files. You can use m
 
 ## Examples of usage
 
-```
+```javascript
 // In your gatsby-config.js
 plugins: [
   {
@@ -22,12 +22,13 @@ plugins: [
         {
           resolve: `gatsby-remark-shiki`,
           options: {
-            theme: 'zeit' // Default: 'nord'
-          }
-        }
+            theme: 'zeit', // Default: 'nord'
+          },
+        },
       ],
     },
   },
+];
 ```
 
 ## How to contribute
