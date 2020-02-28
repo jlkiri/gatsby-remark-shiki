@@ -1,50 +1,51 @@
-import shiki from 'shiki'
-import { TTheme } from 'shiki-themes'
-import { TLang } from 'shiki-languages'
-import { Node } from 'unist'
-import visit from 'unist-util-visit'
+import shiki from 'shiki';
+import { TTheme } from 'shiki-themes';
+import { TLang } from 'shiki-languages';
+import { Node } from 'unist';
+import visit from 'unist-util-visit';
 
 export interface RemarkShikiOptions {
-  theme: TTheme
+  theme: TTheme;
 }
 
 export interface RemarkNode extends Node {
-  type: string,
-  value: string,
-  lang: null | TLang
+  type: string;
+  value: string;
+  lang: null | TLang;
 }
 
-export default async function ({ markdownAST }: any, options: RemarkShikiOptions) {
-  let theme = options.theme || 'nord'
-  let shikiTheme
+export default async function(
+  { markdownAST }: any,
+  options: RemarkShikiOptions
+) {
+  let theme = options.theme || 'nord';
+  let shikiTheme;
 
   try {
-    shikiTheme = shiki.getTheme(theme)
+    shikiTheme = shiki.getTheme(theme);
   } catch (_) {
     try {
-      shikiTheme = shiki.loadTheme(theme)
+      shikiTheme = shiki.loadTheme(theme);
     } catch (_) {
-      throw new Error('Unable to load theme: ' + theme)
+      throw new Error('Unable to load theme: ' + theme);
     }
   }
 
-  shiki
-    .getHighlighter({
-      theme: shikiTheme,
-    })
-    .then(highlighter => {
-      visit(markdownAST, 'code', (node: RemarkNode) => {
-        node.type = 'html'
-        node.children = undefined
+  const highlighter = await shiki.getHighlighter({
+    theme: shikiTheme,
+  });
 
-        if (!node.lang) {
-          node.value = `<pre class="shiki-unknown"><code>${node.value}</code></pre>`
-          return
-        }
+  visit(markdownAST, 'code', (node: RemarkNode) => {
+    node.type = 'html';
+    node.children = undefined;
 
-        node.value = highlighter.codeToHtml!(node.value, node.lang as TLang)
-      })
-    })
+    if (!node.lang) {
+      node.value = `<pre class="shiki-unknown"><code>${node.value}</code></pre>`;
+      return;
+    }
 
-  return markdownAST
+    node.value = highlighter.codeToHtml!(node.value, node.lang as TLang);
+  });
+
+  return markdownAST;
 }
