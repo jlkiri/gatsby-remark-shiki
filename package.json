@@ -46,7 +46,7 @@
     "typescript": "^3.7.5"
   },
   "dependencies": {
-    "shiki": "^0.1.6",
+    "shiki": "^0.2.2",
     "unist-util-visit": "^2.0.1"
   }
 }
