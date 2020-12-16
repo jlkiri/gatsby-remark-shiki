@@ -1,17 +1,18 @@
 import shiki from 'shiki';
-import { TTheme } from 'shiki-themes';
-import { TLang } from 'shiki-languages';
+import { Theme } from 'shiki-themes';
+import { Lang, ILanguageRegistration } from 'shiki-languages';
 import { Node } from 'unist';
 import visit from 'unist-util-visit';
 
 export interface RemarkShikiOptions {
-  theme: TTheme;
+  theme: Theme;
+  langs?: ILanguageRegistration[];
 }
 
 export interface RemarkNode extends Node {
   type: string;
   value: string;
-  lang: null | TLang;
+  lang: null | Lang;
 }
 
 export default async function(
@@ -33,6 +34,7 @@ export default async function(
 
   const highlighter = await shiki.getHighlighter({
     theme: shikiTheme,
+    langs: options.langs || [],
   });
 
   visit(markdownAST, 'code', (node: RemarkNode) => {
@@ -44,7 +46,7 @@ export default async function(
       return;
     }
 
-    node.value = highlighter.codeToHtml!(node.value, node.lang as TLang);
+    node.value = highlighter.codeToHtml!(node.value, node.lang as Lang);
   });
 
   return markdownAST;
