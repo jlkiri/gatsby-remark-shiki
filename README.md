@@ -12,6 +12,8 @@ You need it to highlight code blocks (```) in your markdown files. You can use m
 
 ## Examples of usage
 
+### Simple
+
 ```javascript
 // In your gatsby-config.js
 plugins: [
@@ -23,6 +25,33 @@ plugins: [
           resolve: `gatsby-remark-shiki`,
           options: {
             theme: 'zeit', // Default: 'nord'
+          },
+        },
+      ],
+    },
+  },
+];
+```
+
+### Add your own TextMate language
+
+```javascript
+// In your gatsby-config.js
+plugins: [
+  {
+    resolve: `gatsby-transformer-remark`,
+    options: {
+      plugins: [
+        {
+          resolve: `gatsby-remark-shiki`,
+          options: {
+            langs: [
+              {
+                id: `wowlang`,
+                scopeName: `source.wowlang`,
+                path: cwd_join(`langs/wowlang.tmLanguage.json`),
+              },
+            ],
           },
         },
       ],
