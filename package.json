@@ -39,14 +39,16 @@
   "module": "dist/gatsby-remark-shiki.esm.js",
   "homepage": "https://github.com/jlkiri/gatsby-remark-shiki",
   "devDependencies": {
-    "@types/jest": "^25.1.2",
-    "husky": "^4.2.3",
+    "@types/jest": "^25.2.3",
+    "husky": "^4.3.8",
     "tsdx": "^0.12.3",
-    "tslib": "^1.10.0",
-    "typescript": "^3.7.5"
+    "tslib": "^1.14.1",
+    "typescript": "^3.9.10"
   },
   "dependencies": {
-    "shiki": "^0.2.2",
+    "shiki": "^0.9.12",
+    "shiki-languages": "^0.2.7",
+    "shiki-themes": "^0.2.7",
     "unist-util-visit": "^2.0.1"
   }
 }
