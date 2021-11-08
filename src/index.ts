@@ -20,22 +20,16 @@ export default async function(
   options: RemarkShikiOptions
 ) {
   let theme = options.theme || 'nord';
-  let shikiTheme;
 
+  let highlighter: shiki.Highlighter;
   try {
-    shikiTheme = shiki.getTheme(theme);
+    highlighter = await shiki.getHighlighter({
+      theme,
+      langs: options.langs || [],
+    });
   } catch (_) {
-    try {
-      shikiTheme = shiki.loadTheme(theme);
-    } catch (_) {
-      throw new Error('Unable to load theme: ' + theme);
-    }
+    throw new Error('Unable to load theme: ' + theme);
   }
-
-  const highlighter = await shiki.getHighlighter({
-    theme: shikiTheme,
-    langs: options.langs || [],
-  });
 
   visit(markdownAST, 'code', (node: RemarkNode) => {
     node.type = 'html';
