@@ -24,7 +24,7 @@ plugins: [
         {
           resolve: `gatsby-remark-shiki`,
           options: {
-            theme: 'zeit', // Default: 'nord'
+            theme: 'nord', // Default
           },
         },
       ],
